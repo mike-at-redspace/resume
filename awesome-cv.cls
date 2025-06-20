@@ -74,7 +74,7 @@
 \RequirePackage{unicode-math}
 % Needed to use icons from font-awesome
 % (https://github.com/posquit0/latex-fontawesome)
-\RequirePackage{fontawesome}
+% \RequirePackage{fontawesome}
 \RequirePackage[default,opentype]{sourcesanspro}
 % Needed for the photo ID
 \RequirePackage[skins]{tcolorbox}
@@ -101,9 +101,9 @@
 %-------------------------------------------------------------------------------
 %                Configuration for layout
 %-------------------------------------------------------------------------------
-%% Page Layout
-% Configure page margins with geometry
-\geometry{left=2cm, top=1.5cm, right=2cm, bottom=2.0cm, footskip=.5cm, includehead}
+%% Page Layout - professional print margins
+% Configure page margins with geometry for optimal print appearance
+\geometry{left=2.0cm, top=1.5cm, right=2.0cm, bottom=2.0cm, footskip=.5cm, includehead}
 
 %% Header & Footer
 % Set offset to each header and footer
@@ -131,11 +131,11 @@
 \definecolor{purple}{HTML}{D3A4F9}
 \definecolor{red}{HTML}{FB4485}
 \definecolor{blue}{HTML}{6CE0F1}
-% Text colors
-\definecolor{darktext}{HTML}{414141}
-\colorlet{text}{darkgray}
-\colorlet{graytext}{gray}
-\colorlet{lighttext}{lightgray}
+% Text colors - improved contrast for print
+\definecolor{darktext}{HTML}{2B2B2B}
+\colorlet{text}{darktext}
+\colorlet{graytext}{darkgray}
+\colorlet{lighttext}{gray}
 % Awesome colors
 \definecolor{awesome-emerald}{HTML}{00A388}
 \definecolor{awesome-skyblue}{HTML}{0395DE}
@@ -161,66 +161,125 @@
 %-------------------------------------------------------------------------------
 % Set the FontAwesome font to be up-to-date.
 \newfontfamily\FA[Path=\@fontdir]{FontAwesome}
-% Set font for header (default is Roboto)
+
+% Define FontAwesome icons manually since we're not using the fontawesome package
+\newcommand*{\faPhone}{{\FA \symbol{"F095}}}
+\newcommand*{\faEnvelopeO}{{\FA \symbol{"F003}}}
+\newcommand*{\faHome}{{\FA \symbol{"F015}}}
+\newcommand*{\faGithub}{{\FA \symbol{"F09B}}}
+\newcommand*{\faGitlab}{{\FA \symbol{"F296}}}
+\newcommand*{\faStackOverflow}{{\FA \symbol{"F16C}}}
+\newcommand*{\faLinkedin}{{\FA \symbol{"F0E1}}}
+\newcommand*{\faTwitter}{{\FA \symbol{"F099}}}
+\newcommand*{\faSkype}{{\FA \symbol{"F17E}}}
+\newcommand*{\faReddit}{{\FA \symbol{"F1A1}}}
+\newcommand*{\faXingSquare}{{\FA \symbol{"F169}}}
+\newcommand*{\faCodepen}{{\FA \symbol{"F1CB}}}
+\newcommand*{\faCode}{{\FA \symbol{"F121}}}
+
+% Set Monaspace fonts for modern, technical look
+% Monaspace Neon for headings & name (clean, geometric, bold)
 \newfontfamily\headerfont[
   Path=\@fontdir,
+  Extension=.otf,
   UprightFont=*-Regular,
-  ItalicFont=*-Italic,
-  BoldFont=*-Bold,
-  BoldItalicFont=*-BoldItalic,
-]{Roboto}
+  BoldFont=*-SemiBold,
+  ItalicFont=*-Regular,
+  BoldItalicFont=*-Bold,
+]{MonaspaceNeon}
 
 \newfontfamily\headerfontlight[
   Path=\@fontdir,
-  UprightFont=*-Thin,
-  ItalicFont=*-ThinItalic,
-  BoldFont=*-Medium,
-  BoldItalicFont=*-MediumItalic,
-]{Roboto}
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-SemiBold,
+  ItalicFont=*-Regular,
+  BoldItalicFont=*-SemiBold,
+]{MonaspaceNeon}
 
-\newcommand*{\footerfont}{\sourcesanspro}
-\newcommand*{\bodyfont}{\sourcesanspro}
-\newcommand*{\bodyfontlight}{\sourcesansprolight}
+% Monaspace Krypton for body text (most readable, low contrast)
+\newfontfamily\bodyfont[
+  Path=\@fontdir,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Medium,
+  ItalicFont=*-Regular,
+  BoldItalicFont=*-Medium,
+]{MonaspaceKrypton}
+
+\newfontfamily\bodyfontlight[
+  Path=\@fontdir,
+  Extension=.otf,
+  UprightFont=*-Light,
+  BoldFont=*-Regular,
+  ItalicFont=*-Light,
+  BoldItalicFont=*-Regular,
+]{MonaspaceKrypton}
+
+% Monaspace Argon for meta info, dates, locations (technical, narrow)
+\newfontfamily\metafont[
+  Path=\@fontdir,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Medium,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-Medium,
+]{MonaspaceArgon}
+
+% Monaspace Xenon for highlights, quotes, special text (expressive)
+\newfontfamily\accentfont[
+  Path=\@fontdir,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Regular,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-Italic,
+]{MonaspaceXenon}
+
+% Legacy font commands for compatibility
+\newcommand*{\footerfont}{\metafont}
 
 %-------------------------------------------------------------------------------
 %                Configuration for styles
 %-------------------------------------------------------------------------------
-% Configure styles for each CV elements
-% For fundamental structures
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{32pt}{1em}\headerfont\bfseries\color{text} #1}}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{32pt}{1em}\headerfont\bfseries\color{text} #1}}
-\newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape\color{awesome} #1}}
-\newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{lighttext} #1}}
-\newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
-\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
-\newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text}\sectioncolor{#1}}}
-\newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
-\newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
+% Configure styles for each CV elements with tight spacing and hierarchy
+% For fundamental structures - name and header (compact header as requested)
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{28pt}{0.9em}\headerfont\bfseries\color{text} #1}}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{28pt}{0.9em}\headerfont\bfseries\color{text} #1}}
+\newcommand*{\headerpositionstyle}[1]{{\fontsize{9pt}{1.0em}\metafont\color{awesome} #1}}
+\newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1.0em}\metafont\itshape\color{lighttext} #1}}
+\newcommand*{\headersocialstyle}[1]{{\fontsize{8pt}{1.0em}\metafont\color{text} #1}}
+\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1.0em}\accentfont\itshape\color{darktext} #1}}
+\newcommand*{\footerstyle}[1]{{\fontsize{8pt}{0.9em}\metafont\color{lighttext} #1}}
 
-% For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\entrypositionstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
-\newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+% Section headers - improved hierarchy and print-friendly styling
+\newcommand*{\sectionstyle}[1]{{\fontsize{14pt}{0.9em}\headerfont\bfseries\color{text}\sectioncolor{#1}}}
+\newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{0.9em}\headerfont\bfseries\textcolor{text}{#1}}}
+\newcommand*{\paragraphstyle}{\fontsize{10pt}{1.1em}\bodyfontlight\upshape\color{text}}
+
+% For elements of entry - tighter line heights and stronger hierarchy
+\newcommand*{\entrytitlestyle}[1]{{\fontsize{12pt}{1.0em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\entrypositionstyle}[1]{{\fontsize{10pt}{1.0em}\metafont\bfseries\color{graytext} #1}}
+\newcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{0.9em}\metafont\itshape\color{graytext} #1}}
+\newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{0.9em}\metafont\itshape\color{awesome} #1}}
+\newcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1.1em}\bodyfontlight\upshape\color{text} #1}}
 
 % For elements of subentry
 \newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
-\newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\subentrydatestyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\subentrylocationstyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\metafont\scshape\color{graytext} #1}}
+\newcommand*{\subentrydatestyle}[1]{{\fontsize{7pt}{1em}\metafont\slshape\color{graytext} #1}}
+\newcommand*{\subentrylocationstyle}[1]{{\fontsize{7pt}{1em}\metafont\slshape\color{awesome} #1}}
 \newcommand*{\subdescriptionstyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\upshape\color{text} #1}}
 
 % For elements of honor
 \newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
 \newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\metafont\color{graytext} #1}}
+\newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\metafont\slshape\color{awesome} #1}}
 
-% For elements of skill
-\newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+% For elements of skill - stronger emphasis and tighter spacing
+\newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1.0em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{10pt}{1.0em}\bodyfont\color{text} #1}}
 
 
 %-------------------------------------------------------------------------------
@@ -321,19 +380,19 @@
 %                Commands for extra
 %-------------------------------------------------------------------------------
 %% Define helper macros a user can change easily
-% Header
+% Header - balanced spacing for professional print layout
 \newcommand{\acvHeaderNameDelim}{\space}
-\newcommand{\acvHeaderAfterNameSkip}{.4mm}
-\newcommand{\acvHeaderAfterPositionSkip}{.4mm}
+\newcommand{\acvHeaderAfterNameSkip}{2mm}
+\newcommand{\acvHeaderAfterPositionSkip}{1.5mm}
 \newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
 \newcommand{\acvHeaderIconSep}{\space}
 \newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
-\newcommand{\acvHeaderAfterSocialSkip}{2mm}
-\newcommand{\acvHeaderAfterQuoteSkip}{5mm}
+\newcommand{\acvHeaderAfterSocialSkip}{4mm}
+\newcommand{\acvHeaderAfterQuoteSkip}{4mm}
 
-% Others
-\newcommand{\acvSectionTopSkip}{1mm} % originally 3mm
-\newcommand{\acvSectionContentTopSkip}{2.5mm}
+% Others - balanced spacing for professional print layout
+\newcommand{\acvSectionTopSkip}{2mm}
+\newcommand{\acvSectionContentTopSkip}{1mm}
 
 
 %-------------------------------------------------------------------------------
@@ -414,31 +473,31 @@
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://github.com/\@github}{\faGithub\acvHeaderIconSep\@github}%
-        }%
-      \ifthenelse{\isundefined{\@gitlab}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://gitlab.com/\@gitlab}{\faGitlab\acvHeaderIconSep\@gitlab}%
-        }%
-      \ifthenelse{\isundefined{\@stackoverflowid}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\acvHeaderIconSep\@stackoverflowname}%
+          \href{https://github.com/\@github}{\faGithub}%
         }%
       \ifthenelse{\isundefined{\@linkedin}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedin\acvHeaderIconSep\@linkedin}%
+          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedin}%
+        }%
+      \ifthenelse{\isundefined{\@gitlab}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://gitlab.com/\@gitlab}{\faGitlab}%
+        }%
+      \ifthenelse{\isundefined{\@stackoverflowid}}%
+        {}%
+        {%
+          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+          \href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow}%
         }%
       \ifthenelse{\isundefined{\@twitter}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://twitter.com/\@twitter}{\faTwitter\acvHeaderIconSep\@twitter}%
+          \href{https://twitter.com/\@twitter}{\faTwitter}%
         }%
       \ifthenelse{\isundefined{\@skype}}%
         {}%
@@ -450,13 +509,13 @@
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.reddit.com/user/\@reddit}{\faReddit\acvHeaderIconSep\@reddit}%
+          \href{https://www.reddit.com/user/\@reddit}{\faReddit}%
         }%
       \ifthenelse{\isundefined{\@xing}}%
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}
+          \href{https://www.xing.com/profile/\@xing}{\faXingSquare}
         }%
       \ifthenelse{\isundefined{\@extrainfo}}%
         {}%
@@ -483,13 +542,15 @@
   \fancyfoot[R]{\footerstyle{#3}}
 }
 
-% Define a section for CV
+% Define a section for CV with improved professional divider
 % Usage: \cvsection{<section-title>}
 \newcommand{\cvsection}[1]{%
   \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
   \phantomsection
-  \color{gray}\vhrulefill{0.9pt}
+  \vspace{0.5mm}
+  \color{lightgray}\vhrulefill{0.5pt}
+  \vspace{1mm}
 }
 
 % Define a subsection for CV
@@ -521,19 +582,20 @@
 % Define an entry of cv information
 % Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
 \newcommand*{\cventry}[5]{%
-  \vspace{-2.0mm}
+  \vspace{-1mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \ifempty{#1#3#4}
-      {\entrytitlestyle{#2} \\
-        \multicolumn{1}{L{\textwidth}}{\descriptionstyle{#5}}}
+      {\entrytitlestyle{#2} & \\[0.2mm]
+        \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}}
       {\ifempty{#2#3}
-          {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-          {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-            \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+          {\entrypositionstyle{#1} & \entrydatestyle{#4} \\[0.2mm]}
+          {\entrytitlestyle{#2} \,\textbar\, \entrypositionstyle{#1} & \entrylocationstyle{#3} \\[0.2mm]
+            & \entrydatestyle{#4} \\[0.2mm]}
         \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}}
   \end{tabular*}%
+  \vspace{0.5mm}
 }
 
 % Define an environment for cvsubentry
@@ -578,33 +640,33 @@
   \honordatestyle{#4} & \honorpositionstyle{#1}, \honortitlestyle{#2} & \honorlocationstyle{#3} \\
 }
 
-% Define an environment for cvskill
+% Define an environment for cvskill with better spacing and proper margins
 \newenvironment{cvskills}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-2mm}
+  \vspace{-1mm}
   \begin{center}
     \setlength\tabcolsep{1ex}
-    \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
+    \setlength{\extrarowheight}{1pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.7}}}
 }{%
     \end{tabular*}
   \end{center}
 }
-% Define a line of cv information(skill)
+% Define a line of cv information(skill) with improved spacing and grouping
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
-	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+	\skilltypestyle{#1} & \skillsetstyle{#2} \\[0.5mm] % Tight spacing between skill rows
 }
 
-% Define an environment for cvitems(for cventry)
+% Define an environment for cvitems with professional bullet styling
 \newenvironment{cvitems}{%
-  \vspace{-3.4mm}
+  \vspace{-1mm}
   \begin{justify}
-  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+  \begin{itemize}[leftmargin=5ex, rightmargin=3ex, parsep=0pt, itemsep=1pt]
     \setlength{\parskip}{0pt}
-    \renewcommand{\labelitemi}{\bullet}
+    \renewcommand{\labelitemi}{\textcolor{awesome}{\textbullet}}
 }{%
   \end{itemize}
   \end{justify}
-  \vspace{-3.4mm}
+  \vspace{1mm}
 }

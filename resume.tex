@@ -47,7 +47,7 @@
 \setbool{acvSectionColorHighlight}{true}
 
 % If you would like to change the social information separator from a pipe (|) to something else
-\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+\renewcommand{\acvHeaderSocialSep}{\,\textbar\,}
 
 \makeatletter
 \patchcmd{\@sectioncolor}{\color}{\mdseries\color}{}{}
@@ -59,21 +59,21 @@
 %-------------------------------------------------------------------------------
 % Available options: circle|rectangle,edge/noedge,left/right
 % \photo[rectangle,edge,right]{profile}
-\name{Tanveer}{Mittal}
-\position{Machine Learning Enthusiast \& Data Science Student with 2 years of work experience}
+\name{Mike}{Vardy}
+\position{Senior Full Stack Developer}
 % \address{address}
 
-\mobile{(630) 640-5246}
-\email{tamittal@ucsd.edu}
-\homepage{tanveermittal.github.io}
-\github{TanveerMittal}
-\linkedin{Tanveer Mittal}
+\mobile{613.885.5619}
+\email{mike.vard@gmail.com}
+\homepage{i-heart-php.github.io/me}
+\github{mike-at-redspace}
+\linkedin{mvardy}
 % \gitlab{gitlab-id}
 % \stackoverflow{SO-id}{SO-name}
 % \twitter{@twit}
 % \skype{skype-id}
 % \reddit{reddit-id}
-% \extrainfo{extra informations}
+\extrainfo{\href{https://codepen.io/mike-at-redspace}{\faCodepen}}
 
 %-------------------------------------------------------------------------------
 \begin{document}
@@ -84,19 +84,26 @@
 
 % Print the footer with 3 arguments(<left>, <center>, <right>)
 % Leave any of these blank if they are not needed
-% \makecvfooter
-%   {\today}
-%   {Junhao Dong~~~·~~~Résumé}
-%   {\thepage}
+\makecvfooter
+  {}
+  {\thepage}
+  {}
 
 %-------------------------------------------------------------------------------
 %	CV/RESUME CONTENT
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
-\input{resume/education.tex}
+\input{resume/summary.tex}
 \input{resume/skills.tex}
 \input{resume/experience.tex}
-\input{resume/projects.tex}
+\clearpage
+\vspace*{8mm}
+\input{resume/education.tex}
+
+\vfill
+\begin{center}
+\textit{<>Additional work experience available upon request</>}
+\end{center}
 
 %-------------------------------------------------------------------------------
 \end{document}
